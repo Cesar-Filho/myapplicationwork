@@ -6,12 +6,12 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/loginTitle"
+        android:id="@+id/registerTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="40dp"
         android:gravity="center"
-        android:text="Login"
+        android:text="Register"
         android:textSize="35dp" />
 
     <EditText
@@ -27,18 +27,6 @@
         android:layout_height="wrap_content"
         android:hint="Password"
         android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/signIn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/signIn" />
-
-    <Button
-        android:id="@+id/recovery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/recovery" />
 
     <Button
         android:id="@+id/signUp"

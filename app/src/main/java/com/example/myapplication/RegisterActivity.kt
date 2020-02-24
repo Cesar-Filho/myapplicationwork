@@ -1,52 +1,47 @@
 package com.example.myapplication
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_register.email
+import kotlinx.android.synthetic.main.activity_register.password
+import kotlinx.android.synthetic.main.activity_register.signUp
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_register)
+        email.setText(intent.getStringExtra("EMAIL"))
 
-        signIn.setOnClickListener(this)
         signUp.setOnClickListener(this)
     }
 
-    private fun startSignIn(email: String, password: String) {
+    private fun startSignUp(email: String, password: String) {
         if (!validateForm()) {
             return
         }
         auth = FirebaseAuth.getInstance()
-        auth.signInWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(
-                        baseContext, "Authentication success.",
+                        baseContext, "Create user success.",
                         Toast.LENGTH_SHORT
                     ).show()
+                    finish()
                 } else {
                     Toast.makeText(
-                        baseContext, "Authentication failed.",
+                        baseContext, "Create user failed.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
-    }
-
-    private fun startSignUp() {
-        val intent: Intent = Intent(this, RegisterActivity::class.java).apply {
-            putExtra("EMAIL", email.text.toString())
-        }
-        startActivity(intent)
     }
 
     private fun validateForm(): Boolean {
@@ -72,10 +67,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.signIn -> startSignIn(email.text.toString(), password.text.toString())
-            R.id.signUp -> startSignUp()
-        }
+        startSignUp(email.text.toString(), password.text.toString())
     }
-
 }
