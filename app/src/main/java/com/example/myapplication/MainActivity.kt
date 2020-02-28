@@ -17,9 +17,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        email.setText("cesar@gmail.com")
-        password.setText("123456")
-
         signIn.setOnClickListener(this)
         recovery.setOnClickListener(this)
         signUp.setOnClickListener(this)
