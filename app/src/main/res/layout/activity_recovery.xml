@@ -6,12 +6,12 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/loginTitle"
+        android:id="@+id/recoveryTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="40dp"
-        android:text="Register"
+        android:text="Digite seu e-mail"
         android:textSize="35dp" />
 
     <EditText
@@ -21,17 +21,10 @@
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
     <Button
-        android:id="@+id/signUp"
+        android:id="@+id/recovery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/signUp" />
+        android:text="@string/send" />
 
 </LinearLayout>

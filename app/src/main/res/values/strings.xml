@@ -3,4 +3,7 @@
     <string name="signIn">Entrar</string>
     <string name="recovery">Esqueci a senha</string>
     <string name="signUp">Cadastrar-me</string>
+    <string name="reset">Reiniciar</string>
+    <string name="exit">Sair</string>
+    <string name="send">Enviar</string>
 </resources>

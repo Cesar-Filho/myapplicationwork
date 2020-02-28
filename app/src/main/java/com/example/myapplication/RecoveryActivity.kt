@@ -6,38 +6,37 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_register.email
-import kotlinx.android.synthetic.main.activity_register.password
-import kotlinx.android.synthetic.main.activity_register.signUp
+import kotlinx.android.synthetic.main.activity_recovery.*
+import kotlinx.android.synthetic.main.activity_recovery.email
 
-class RegisterActivity : AppCompatActivity(), View.OnClickListener {
+class RecoveryActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_recovery)
 
         email.setText(intent?.getStringExtra("EMAIL"))
-        signUp.setOnClickListener(this)
+        recovery.setOnClickListener(this)
     }
 
-    private fun startSignUp(email: String, password: String) {
+    private fun recovery(email: String) {
         if (!validateForm()) {
             return
         }
         auth = FirebaseAuth.getInstance()
-        auth.createUserWithEmailAndPassword(email, password)
+        auth.sendPasswordResetEmail(email)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(
-                        baseContext, "Create user success.",
+                        baseContext, "Recovery success.",
                         Toast.LENGTH_SHORT
                     ).show()
                     finish()
                 } else {
                     Toast.makeText(
-                        baseContext, "Create user failed.",
+                        baseContext, "Recovery  failed.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -55,18 +54,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             email.error = null
         }
 
-        val fieldPassword = password.text.toString()
-        if (TextUtils.isEmpty(fieldPassword)) {
-            password.error = "Required."
-            valid = false
-        } else {
-            password.error = null
-        }
-
         return valid
     }
 
     override fun onClick(v: View?) {
-        startSignUp(email.text.toString(), password.text.toString())
+        recovery(email.text.toString())
     }
 }

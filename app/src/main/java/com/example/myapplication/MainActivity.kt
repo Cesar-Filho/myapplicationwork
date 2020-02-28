@@ -17,7 +17,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        email.setText("cesar@gmail.com")
+        password.setText("123456")
+
         signIn.setOnClickListener(this)
+        recovery.setOnClickListener(this)
         signUp.setOnClickListener(this)
     }
 
@@ -33,6 +37,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         baseContext, "Authentication success.",
                         Toast.LENGTH_SHORT
                     ).show()
+                    val intent = Intent(this, QuizActivity::class.java)
+                    startActivity(intent)
                 } else {
                     Toast.makeText(
                         baseContext, "Authentication failed.",
@@ -44,6 +50,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun startSignUp() {
         val intent: Intent = Intent(this, RegisterActivity::class.java).apply {
+            putExtra("EMAIL", email.text.toString())
+        }
+        startActivity(intent)
+    }
+
+    private fun recovery() {
+        val intent: Intent = Intent(this, RecoveryActivity::class.java).apply {
             putExtra("EMAIL", email.text.toString())
         }
         startActivity(intent)
@@ -75,6 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         when (v!!.id) {
             R.id.signIn -> startSignIn(email.text.toString(), password.text.toString())
             R.id.signUp -> startSignUp()
+            R.id.recovery -> recovery()
         }
     }
 
